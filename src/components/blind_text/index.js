@@ -19,11 +19,19 @@ const HiddenText = styled.span`
   border-radius: 5px;
 `
 
-const CurrentWord = styled(ContentEditable)`
+const CurrentWord = styled.span`
   color: black;
   readonly: false;
   user-select: text;
   outline: none;
+`
+
+const Cursor = styled(ContentEditable)`
+  color: black;
+  readonly: false;
+  user-select: text;
+  outline: none;
+  border: none;
 `
 
 class BlindText extends Component {
@@ -39,47 +47,37 @@ class BlindText extends Component {
     this.focus()
   }
 
-  handleChange = event => {
-    let currentWord = event.target.value.replace(/&nbsp;/, " ")
-    this.setState({ currentWord: currentWord })
-    console.log("currentWord is:" + currentWord)
-    console.log("last letter equals " + /\S+\n/.test(currentWord))
-    console.log("text is:" + this.state.text)
-    if (/\S+\s$/.test(currentWord)) {
-      console.log("1")
-      this.setState({ currentWord: "" })
-      this.setState({ text: this.state.text + currentWord })
-    } else if (/\S+<br>$/.test(currentWord)) {
-      console.log("2")
-      this.setState({ currentWord: "" })
-      this.setState({ text: this.state.text + currentWord.replace(/<br>$/, "") })
-    } else if (/\S+\n/.test(currentWord)) {
-      console.log("3")
-      this.setState({ currentWord: "" })
-      this.setState({ text: this.state.text + currentWord.replace(/\n/, " ") })
-    }
-  }
-
   handlePress = event => {
+    const { text, currentWord } = this.state
+    event.preventDefault()
     console.log(event.key)
-    console.log("currentWord is " + this.state.currentWord)
-    console.log("text is " + this.state.text)
-    if (event.key === " ") {
-      event.preventDefault()
-      console.log("space")
-      this.setState({ text: this.state.text + " " + this.state.currentWord })
-      this.setState({ currentWord: "" })
-    } else if (event.key === "Enter") {
-      event.preventDefault()
-      this.setState({ text: this.state.text + "\n" + this.state.currentWord })
-      this.setState({ currentWord: "" })
-    } else {
-      this.setState({ currentWord: this.state.currentWord + event.key })
+    console.log("currentWord is " + currentWord)
+    console.log("text is " + text)
+    switch (event.key) {
+      case " ":
+      console.log("what")
+        if (text === "" || /.*\n/.test(text)) {
+          this.setState({ text: `${text}${currentWord} `, currentWord: "" })
+        } else {
+          this.setState({ text: `${text} ${currentWord} `, currentWord: "" })
+        }
+        break
+      case "Enter":
+        this.setState({ text: `${text}${currentWord}\n`, currentWord: "" })
+        break
+      case "Backspace":
+      case "Delete":
+        this.setState({ currentWord: currentWord.slice(0, -1) })
+        break
+      default:
+        if (event.key.length === 1) {
+          this.setState({ currentWord: currentWord + event.key })
+        }
     }
   }
 
   focus = () => {
-    this.currentWord.focus()
+    this.cursor.focus()
   }
 
   render() {
@@ -90,13 +88,15 @@ class BlindText extends Component {
           spellcheck="false"
         />
         <CurrentWord
-          tagName="span"
-          html={this.state.currentWord}
-          // onChange={this.handleChange}
+          dangerouslySetInnerHTML={{ __html: this.state.currentWord }}
           onKeyPress={this.handlePress}
+        />
+        <Cursor
+          tagName="span"
           internalRef={input => {
-            this.currentWord = input
+            this.cursor = input
           }}
+          onKeyDown={this.handlePress}
         />
       </TextWrapper>
     )
