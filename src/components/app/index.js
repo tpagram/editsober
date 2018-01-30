@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import styled, { injectGlobal } from "styled-components"
 import BlindText from "../blind_text"
+import Footer from "../footer"
 
 injectGlobal`
   body {
@@ -9,7 +10,7 @@ injectGlobal`
 `
 
 const Background = styled.div`
-  background: white;
+  background: black;
   height: 100vh;
   width: 100vw;
   display: grid;
@@ -20,10 +21,22 @@ const Background = styled.div`
 `
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      visible: false
+    }
+  }
+
+  setVisible = () => {
+    this.setState({ visible: !this.state.visible })
+  }
+
   render() {
     return (
       <Background>
-        <BlindText />
+        <BlindText visible={this.state.visible} />
+        <Footer onClick={this.setVisible} />
       </Background>
     )
   }

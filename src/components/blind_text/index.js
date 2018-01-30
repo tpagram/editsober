@@ -1,33 +1,28 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import ContentEditable from "../content_editable"
+import HiddenText from "../hidden_text"
 
 const TextWrapper = styled.div`
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-  background: white;
+  background: black;
+  color: white;
   max-width: 100%;
   overflow: auto;
-  background: white;
   readonly: true;
   user-select: none;
   white-space: pre-wrap;
-`
-const HiddenText = styled.span`
-  color: black;
-  background: black;
-  border-radius: 5px;
+  // font-size: 18px;
+  outline: none;
 `
 
 const CurrentWord = styled.span`
-  color: black;
-  readonly: false;
-  user-select: text;
   outline: none;
 `
 
 const Cursor = styled(ContentEditable)`
-  color: black;
+  color: white;
   readonly: false;
   user-select: text;
   outline: none;
@@ -47,20 +42,22 @@ class BlindText extends Component {
     this.focus()
   }
 
+  focus = () => {
+    this.cursor.focus()
+  }
+
   handlePress = event => {
     const { text, currentWord } = this.state
     event.preventDefault()
+    console.log(event.key)
+    console.log(event.keyCode)
+    console.log(event.CharCode)
     console.log(event.key)
     console.log("currentWord is " + currentWord)
     console.log("text is " + text)
     switch (event.key) {
       case " ":
-      console.log("what")
-        if (text === "" || /.*\n/.test(text)) {
-          this.setState({ text: `${text}${currentWord} `, currentWord: "" })
-        } else {
-          this.setState({ text: `${text} ${currentWord} `, currentWord: "" })
-        }
+        this.setState({ text: `${text}${currentWord} `, currentWord: "" })
         break
       case "Enter":
         this.setState({ text: `${text}${currentWord}\n`, currentWord: "" })
@@ -76,17 +73,10 @@ class BlindText extends Component {
     }
   }
 
-  focus = () => {
-    this.cursor.focus()
-  }
-
   render() {
     return (
       <TextWrapper onClick={this.focus}>
-        <HiddenText
-          dangerouslySetInnerHTML={{ __html: this.state.text }}
-          spellcheck="false"
-        />
+        <HiddenText text={this.state.text} visible={this.props.visible} />
         <CurrentWord
           dangerouslySetInnerHTML={{ __html: this.state.currentWord }}
           onKeyPress={this.handlePress}
@@ -96,7 +86,7 @@ class BlindText extends Component {
           internalRef={input => {
             this.cursor = input
           }}
-          onKeyDown={this.handlePress}
+          onKeyPress={this.handlePress}
         />
       </TextWrapper>
     )
