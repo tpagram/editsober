@@ -4,14 +4,14 @@ import styled from "styled-components"
 const Word = styled.span.attrs({
   spellCheck: false
 })`
-  color: white;
-  background: white;
+  color: ${props => props.theme.foreground};
+  background: ${props => props.theme.foreground};
   border-radius: 4px;
   // padding: 0 5px;
 `
 
 const Whitespace = styled.span`
-  background: black;
+  background: ${props => props.theme.background};
 `
 
 class HiddenText extends Component {
@@ -26,9 +26,9 @@ class HiddenText extends Component {
   }
 
   render() {
-    return (
-      this.props.visible ? this.props.text : this.formatText(this.props.text)
-    )
+    return this.props.visible
+      ? this.props.text
+      : this.formatText(this.props.text)
   }
 }
 

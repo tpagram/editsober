@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import styled, { injectGlobal } from "styled-components"
+import styled, { injectGlobal, ThemeProvider } from "styled-components"
 import BlindText from "../blind_text"
 import Footer from "../footer"
 
@@ -8,9 +8,20 @@ injectGlobal`
     margin: 0;
   }
 `
+const lightTheme = {
+  background: "white",
+  foreground: "black",
+  icon: "moon"
+}
+
+const darkTheme = {
+  background: "black",
+  foreground: "white",
+  icon: "sun"
+}
 
 const Background = styled.div`
-  background: black;
+  background: ${props => props.theme.background};
   height: 100vh;
   width: 100vw;
   display: grid;
@@ -24,20 +35,44 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      visible: false
+      visible: false,
+      theme: darkTheme,
+      wordCount: 0
     }
   }
 
-  setVisible = () => {
+  toggleVisible = () => {
     this.setState({ visible: !this.state.visible })
+  }
+
+  toggleTheme = () => {
+    if (this.state.theme === darkTheme) {
+      this.setState({ theme: lightTheme })
+    } else {
+      this.setState({ theme: darkTheme })
+    }
+  }
+
+  setWordCount = text => {
+    this.setState({ wordCount: text.match(/\S+/g).length })
   }
 
   render() {
     return (
-      <Background>
-        <BlindText visible={this.state.visible} />
-        <Footer onClick={this.setVisible} />
-      </Background>
+      <ThemeProvider theme={this.state.theme}>
+        <Background>
+          <BlindText
+            visible={this.state.visible}
+            setWordCount={this.setWordCount}
+          />
+          <Footer
+            toggleVisible={this.toggleVisible}
+            toggleTheme={this.toggleTheme}
+            visible={this.state.visible}
+            wordCount={this.state.wordCount}
+          />
+        </Background>
+      </ThemeProvider>
     )
   }
 }
