@@ -1,22 +1,9 @@
 import React, { Component } from "react"
-import styled from "styled-components"
-
-const Word = styled.span.attrs({
-  spellCheck: false
-})`
-  color: ${props => props.theme.foreground};
-  background: ${props => props.theme.foreground};
-  border-radius: 4px;
-  // padding: 0 5px;
-`
-
-const Whitespace = styled.span`
-  background: ${props => props.theme.background};
-`
+import { Whitespace, Word } from "./styles"
 
 class HiddenText extends Component {
   formatText = text => {
-    return text.split(/(\s+)/).map((word, i) => {
+    return text.map((word, i) => {
       if (/ |\n/.test(word)) {
         return <Whitespace key={i}>{word}</Whitespace>
       } else {
