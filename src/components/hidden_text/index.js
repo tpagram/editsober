@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Whitespace, Word } from "./styles"
+import { Whitespace, Word, VisibleText } from "./styles"
 
 class HiddenText extends Component {
   formatText = text => {
@@ -14,7 +14,7 @@ class HiddenText extends Component {
 
   render() {
     return this.props.visible
-      ? this.props.text
+      ? <VisibleText> {this.props.text} </VisibleText>
       : this.formatText(this.props.text)
   }
 }

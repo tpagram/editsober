@@ -12,3 +12,8 @@ export const Word = styled.span.attrs({
 export const Whitespace = styled.span`
   background: ${props => props.theme.background};
 `
+
+export const VisibleText = styled.span`
+  readonly: false;
+  user-select: text;
+`
