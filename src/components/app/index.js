@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Background, lightTheme, darkTheme } from "./styles"
+import { Header, Background, lightTheme, darkTheme } from "./styles"
 import { ThemeProvider } from "styled-components"
 import BlindText from "../blind_text"
 import Footer from "../footer"
@@ -34,6 +34,9 @@ class App extends Component {
     return (
       <ThemeProvider theme={this.state.theme}>
         <Background>
+          <Header>
+            Edit Sober
+          </Header>
           <BlindText
             visible={this.state.visible}
             incrementWordCount={this.incrementWordCount}

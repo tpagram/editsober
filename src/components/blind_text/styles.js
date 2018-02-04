@@ -11,7 +11,6 @@ export const TextWrapper = styled.div`
   readonly: true;
   user-select: none;
   white-space: pre-wrap;
-  // font-size: 18px;
   outline: none;
 `
 

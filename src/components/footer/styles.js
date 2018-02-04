@@ -9,12 +9,14 @@ export const FooterWrapper = styled.div`
   justify-content: center;
   grid-column: 1 / 4;
   grid-row: 3 / 4;
+  align-items: center;
 `
 
 export const VisibleButton = styled.button`
   width: 60px;
   height: 60px;
   background-color: ${props => props.theme.background};
+  color: ${props => props.theme.foreground};
   border: none;
   outline: none;
 `
@@ -23,41 +25,35 @@ export const ThemeButton = styled.button`
   width: 60px;
   height: 60px;
   background-color: ${props => props.theme.background};
+  color: ${props => props.theme.foreground};
   border: none;
   outline: none;
 `
 
 export const WordCount = styled.div`
-  width: 60px;
-  height: 60px;
   color: ${props => props.theme.foreground};
   font-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0 20px;
   background-color: ${props => props.theme.background};
+  font-family: 'Courgette', cursive;
 `
 
 export const Moon = styled(moon)`
   width: 100%;
   height: 100%;
-  color: ${props => props.theme.foreground};
 `
 
 export const Sun = styled(sun)`
   width: 100%;
   height: 100%;
-  color: ${props => props.theme.foreground};
 `
 
 export const Eye = styled(eye)`
   width: 100%;
   height: 100%;
-  color: ${props => props.theme.foreground};
 `
 
 export const Pencil = styled(pencil)`
   width: 100%;
   height: 100%;
-  color: ${props => props.theme.foreground};
 `
