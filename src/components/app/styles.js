@@ -2,8 +2,11 @@ import styled, { injectGlobal } from "styled-components"
 
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Courgette|Open+Sans');
-  body {
+  html, body {
     margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 `
 export const lightTheme = {
@@ -23,25 +26,27 @@ export const darkTheme = {
 export const Background = styled.div`
   background: ${props => props.theme.background};
   height: 100vh;
-  width: 100vw;
-  display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
-  grid-template-rows: 1fr 9fr 1fr;
+
   word-wrap: break-word;
   overflow-wrap: break-word;
   text-rendering: optimizeLegibility;
   font-size: 16px;
   line-height: 1.8;
   font-family: "Open Sans";
+
+  display: flex;
+  flex-direction: column;
 `
 
 export const Header = styled.div`
-  color: ${props => props.theme.accent};
-  font-size: 32px;
+  flex: 1 0 0;
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  grid-column:  2 / 3;
-  grid-row: 0 / 1;
+
+  color: ${props => props.theme.accent};
+  font-size: 32px;
   font-family: 'Courgette', cursive;
 `

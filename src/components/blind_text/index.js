@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import {TextWrapper, CurrentWord, Cursor } from "./styles"
+import { Content, TextWrapper, CurrentWord, Cursor } from "./styles"
 import HiddenText from "../hidden_text"
 
 class BlindText extends Component {
@@ -23,7 +23,9 @@ class BlindText extends Component {
   handleCharacter = (isNewWord, character) => {
     const { text, currentWord, isTypingWhitespace } = this.state
     if (isNewWord) {
-      if (isTypingWhitespace) { this.props.incrementWordCount() }
+      if (isTypingWhitespace) {
+        this.props.incrementWordCount()
+      }
       this.setState({
         text: [...text, currentWord],
         isTypingWhitespace: !isTypingWhitespace,
@@ -57,20 +59,19 @@ class BlindText extends Component {
 
   render() {
     return (
-      <TextWrapper onClick={this.focus}>
-        <HiddenText text={this.state.text} visible={this.props.visible} />
-        <CurrentWord
-          dangerouslySetInnerHTML={{ __html: this.state.currentWord }}
-          onKeyPress={this.handlePress}
-        />
-        <Cursor
-          tagName="span"
-          internalRef={input => {
-            this.cursor = input
-          }}
-          onKeyDown={this.handlePress}
-        />
-      </TextWrapper>
+      <Content tabIndex="1" onKeyDown={this.handlePress}>
+        <TextWrapper onClick={this.focus}>
+          <HiddenText text={this.state.text} visible={this.props.visible} />
+          <CurrentWord>{this.state.currentWord}</CurrentWord>
+          <Cursor
+            tagName="span"
+            internalRef={input => {
+              this.cursor = input
+            }}
+            onKeyDown={this.handlePress}
+          />
+        </TextWrapper>
+      </Content>
     )
   }
 }

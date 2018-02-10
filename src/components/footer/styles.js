@@ -5,10 +5,10 @@ import eye from "react-icons/lib/fa/eye"
 import pencil from "react-icons/lib/fa/pencil"
 
 export const FooterWrapper = styled.div`
+  flex: 1 0 0;
+
   display: flex;
   justify-content: center;
-  grid-column: 1 / 4;
-  grid-row: 3 / 4;
   align-items: center;
 `
 

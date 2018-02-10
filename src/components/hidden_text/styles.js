@@ -14,6 +14,6 @@ export const Whitespace = styled.span`
 `
 
 export const VisibleText = styled.span`
-  readonly: false;
+  // readonly: false;
   user-select: text;
 `
