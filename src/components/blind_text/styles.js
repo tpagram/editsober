@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import ContentEditable from "../content_editable"
 
 export const Content = styled.div`
   flex: 9 0 0;
@@ -25,14 +24,6 @@ export const TextWrapper = styled.div`
 
 export const CurrentWord = styled.span`
   outline: none;
-`
-
-export const Cursor = styled(ContentEditable)`
-  color: ${props => props.theme.foreground};
-  // readonly: false;
-  user-select: text;
-  outline: none;
-  border: none;
 `
 
 // const blink = keyframes`

@@ -6,7 +6,6 @@ export const Word = styled.span.attrs({
   color: ${props => props.theme.foreground};
   background: ${props => props.theme.foreground};
   border-radius: 4px;
-  // padding: 0 5px;
 `
 
 export const Whitespace = styled.span`
@@ -14,6 +13,5 @@ export const Whitespace = styled.span`
 `
 
 export const VisibleText = styled.span`
-  // readonly: false;
   user-select: text;
 `

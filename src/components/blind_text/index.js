@@ -1,6 +1,7 @@
 import React, { Component } from "react"
-import { Content, TextWrapper, CurrentWord, Cursor } from "./styles"
+import { Content, TextWrapper, CurrentWord } from "./styles"
 import HiddenText from "../hidden_text"
+import Cursor from "../cursor"
 
 class BlindText extends Component {
   constructor() {
@@ -18,6 +19,10 @@ class BlindText extends Component {
 
   focus = () => {
     this.cursor.focus()
+  }
+
+  scroll = () => {
+    this.cursor.scrollIntoView({ behavior: "smooth" })
   }
 
   handleCharacter = (isNewWord, character) => {
@@ -55,20 +60,19 @@ class BlindText extends Component {
           this.handleCharacter(isTypingWhitespace, event.key)
         }
     }
+    this.scroll()
   }
 
   render() {
     return (
-      <Content tabIndex="1" onKeyDown={this.handlePress}>
-        <TextWrapper onClick={this.focus}>
+      <Content tabIndex="1" onKeyDown={this.handlePress} onClick={this.focus}>
+        <TextWrapper>
           <HiddenText text={this.state.text} visible={this.props.visible} />
           <CurrentWord>{this.state.currentWord}</CurrentWord>
           <Cursor
-            tagName="span"
-            internalRef={input => {
+            reference={input => {
               this.cursor = input
             }}
-            onKeyDown={this.handlePress}
           />
         </TextWrapper>
       </Content>

@@ -13,9 +13,11 @@ class HiddenText extends Component {
   }
 
   render() {
-    return this.props.visible
-      ? <VisibleText> {this.props.text} </VisibleText>
-      : this.formatText(this.props.text)
+    return this.props.visible ? (
+      <VisibleText>{this.props.text}</VisibleText>
+    ) : (
+      this.formatText(this.props.text)
+    )
   }
 }
 
