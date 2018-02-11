@@ -12,15 +12,15 @@ class Footer extends Component {
     let ThemeIcon = this.icons[this.props.theme.icon]
     return (
       <FooterWrapper>
-        <ThemeButton onClick={this.props.toggleTheme}>
-          <ThemeIcon />
-        </ThemeButton>
-        <WordCount>
-          {this.props.wordCount}
-        </WordCount>
         <VisibleButton onClick={this.props.toggleVisible}>
           {this.props.visible ? <Pencil /> : <Eye />}
         </VisibleButton>
+        <WordCount>
+          {this.props.wordCount}
+        </WordCount>
+        <ThemeButton onClick={this.props.toggleTheme}>
+          <ThemeIcon />
+        </ThemeButton>
       </FooterWrapper>
     )
   }

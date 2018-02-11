@@ -9,7 +9,7 @@ class App extends Component {
     super()
     this.state = {
       visible: false,
-      theme: darkTheme,
+      theme: lightTheme,
       wordCount: 0
     }
   }

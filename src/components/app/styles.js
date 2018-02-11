@@ -11,15 +11,15 @@ injectGlobal`
 `
 export const lightTheme = {
   background: "white",
-  foreground: "black",
+  foreground: "#21252b",
+  accent: "#21252b",
   icon: "moon"
 }
 
 export const darkTheme = {
-  background: '#191c1d',
+  background: '#21252b',
   foreground: "white",
-  accent: "#F8B147",
-  // accent: "white",
+  accent: "white",
   icon: "sun"
 }
 

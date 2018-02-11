@@ -19,6 +19,9 @@ export const VisibleButton = styled.button`
   color: ${props => props.theme.foreground};
   border: none;
   outline: none;
+  &:hover {
+    color: ${props => props.theme.accent};
+  }
 `
 
 export const ThemeButton = styled.button`
@@ -33,7 +36,7 @@ export const ThemeButton = styled.button`
 export const WordCount = styled.div`
   color: ${props => props.theme.foreground};
   font-size: 40px;
-  margin: 0 20px;
+  margin: 0 30px;
   background-color: ${props => props.theme.background};
   font-family: 'Courgette', cursive;
 `
