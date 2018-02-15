@@ -18,7 +18,9 @@ class BlindText extends Component {
   }
 
   focus = () => {
-    this.cursor.focus()
+    if (!this.props.visible) {
+      this.cursor.focus()
+    }
   }
 
   scroll = () => {

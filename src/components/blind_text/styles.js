@@ -4,7 +4,12 @@ export const Content = styled.div`
   flex: 9 0 0;
 
   display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
+  @media only screen
+    and (max-device-width: 480px)
+    and (orientation: portrait) {
+      grid-template-columns: 1fr 8fr 1fr;
+  }
 
   overflow-y: auto;
   outline: none;
@@ -17,7 +22,6 @@ export const TextWrapper = styled.div`
   color: ${props => props.theme.foreground};
   outline: none;
 
-  // readonly: true;
   user-select: none;
   white-space: pre-wrap;
 `
@@ -25,16 +29,3 @@ export const TextWrapper = styled.div`
 export const CurrentWord = styled.span`
   outline: none;
 `
-
-// const blink = keyframes`
-//   from, to {
-//     opacity: 0;
-//   }
-//   50% {
-//     opacity: 1;
-//   }
-// `
-//
-// export const Cursor = styled.span`
-//   animation: ${blink} 1s step-end infinite;
-// `

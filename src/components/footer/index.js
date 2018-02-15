@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { withTheme } from "styled-components"
-import { FooterWrapper, ThemeButton, WordCount, VisibleButton, Moon, Sun, Pencil, Eye} from "./styles"
+import { FooterWrapper, FooterButton, WordCount, Moon, Sun, Pencil, Eye} from "./styles"
 
 class Footer extends Component {
   constructor() {
@@ -12,15 +12,15 @@ class Footer extends Component {
     let ThemeIcon = this.icons[this.props.theme.icon]
     return (
       <FooterWrapper>
-        <VisibleButton onClick={this.props.toggleVisible}>
+        <FooterButton onClick={this.props.toggleVisible}>
           {this.props.visible ? <Pencil /> : <Eye />}
-        </VisibleButton>
+        </FooterButton>
         <WordCount>
           {this.props.wordCount}
         </WordCount>
-        <ThemeButton onClick={this.props.toggleTheme}>
+        <FooterButton onClick={this.props.toggleTheme}>
           <ThemeIcon />
-        </ThemeButton>
+        </FooterButton>
       </FooterWrapper>
     )
   }
