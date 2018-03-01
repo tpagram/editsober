@@ -3,6 +3,7 @@ import { Header, Background, lightTheme, darkTheme } from "./styles"
 import { ThemeProvider } from "styled-components"
 import BlindText from "../blind_text"
 import Footer from "../footer"
+import ReactGA from 'react-ga';
 
 class App extends Component {
   constructor() {
@@ -12,6 +13,8 @@ class App extends Component {
       theme: lightTheme,
       wordCount: 0
     }
+    ReactGA.initialize('UA-100035749-1');
+    ReactGA.pageview('/editsober');
   }
 
   toggleVisible = () => {
